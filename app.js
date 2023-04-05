@@ -14,6 +14,9 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
+//configuramos las variables de entorno
+dotenv.config({path: './env/.env'});
+
 //definimos las rutas
 app.get('/', (req, res)=>{
     res.send('Hol fer')
