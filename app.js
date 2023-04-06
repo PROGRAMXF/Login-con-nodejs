@@ -23,10 +23,6 @@ dotenv.config({path: './env/.env'});
 //llamar al router
 app.use('/', require('./routers/router'))
 
-//definimos las rutas
-/*app.get('/', (req, res)=>{
-    res.render('index.ejs')
-});*/
 
 
 app.listen(3000, ()=>{
