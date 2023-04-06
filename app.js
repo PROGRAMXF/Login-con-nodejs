@@ -17,6 +17,9 @@ app.use(express.json());
 //configuramos las variables de entorno
 dotenv.config({path: './env/.env'});
 
+//configuramos las cookies
+app.use(cookieParser);
+
 //definimos las rutas
 app.get('/', (req, res)=>{
     res.send('Hol fer')
