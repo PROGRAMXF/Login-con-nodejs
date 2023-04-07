@@ -1,7 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
+//llamamos a la conexion de la db
+const conexion = require('../database/db');
+
 router.get('/', (req, res)=>{
+    conexion()
     res.render('index.ejs');
 });
 
