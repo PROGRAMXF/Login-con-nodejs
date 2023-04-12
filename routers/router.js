@@ -1,8 +1,14 @@
 const express = require('express');
+const { register } = require('../controllers/authControllers');
 const router = express.Router();
 
 //llamamos a la conexion de la db
 //const conexion = require('../database/db');
+
+const authControllers = require('../controllers/authControllers');
+
+//router para las vistas
+
 
 router.get('/', (req, res)=>{
     
@@ -18,5 +24,11 @@ router.get('/login', (req, res)=>{
 router.get('/register', (req, res)=>{
     res.render('register.ejs');
 });
+
+
+
+//routers para los metodos del controller
+
+router.post('/register', authControllers.register);
 
 module.exports = router;
