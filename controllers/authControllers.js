@@ -41,7 +41,30 @@ exports.login = async(req,res)=>{
             })
 
         }else{
-            conexion.query('SELECT * FROM users WHERE user = ?', [user])
+            conexion.query('SELECT * FROM users WHERE user = ?', [user], async (error, results)=>{
+                if(results.length == 0 || ! (await bcryptjs.compare(pass, results[0].pass))){
+                    res.render('login', {
+                        alert:true,
+                        alertTitle:"Advertencia",
+                        alertMessage:"Ingrese un usuario y password",
+                        alertIcon:'info',
+                        showConfirmButton: true,
+                        timer:false,
+                        ruta:'login'
+                    })
+        
+                }else{
+                    //inicio de sesion ok
+                    const id = results[0].id
+                    const token = jwt.sign({id:id}, process.env.JWT_SECRETO, {
+                        expiresIn: process.env.JWT_TIEMPO_EXPIRA
+                    })
+                    //generamos el token sin fecha de expiracion
+                    //const token = jwt.sign({id:id}, process.env.JWT_SECRETO)
+                    console.log("TOKEN: " + token + "para el USUARIO : " + user)
+                }
+
+            })
         }
 
     }catch(error){
