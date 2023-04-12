@@ -17,7 +17,7 @@ router.get('/', (req, res)=>{
 
 //ruta para el login
 router.get('/login', (req, res)=>{
-    res.render('login.ejs');
+    res.render('login.ejs',{alert:false});
 });
 
 //ruta para el register
