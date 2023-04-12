@@ -30,5 +30,6 @@ router.get('/register', (req, res)=>{
 //routers para los metodos del controller
 
 router.post('/register', authControllers.register);
+router.post('/login', authControllers.login);
 
 module.exports = router;

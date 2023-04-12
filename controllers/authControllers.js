@@ -21,7 +21,30 @@ try {
     console.log(error);
 }
 
+}
 
+//metodo para el login
+exports.login = async(req,res)=>{
+    try{
+        const user = req.body.user;
+        const pass = req.body.pass;
+        
+        if(user || pass){
+            res.render('login', {
+                alert:true,
+                alertTitle:"Advertencia",
+                alertMessage:"Ingrese un usuario y password",
+                alertIcon:'info',
+                showConfirmButton: true,
+                timer:false,
+                ruta:'login'
+            })
 
+        }else{
+            conexion.query('SELECT * FROM users WHERE user = ?', [user])
+        }
 
+    }catch(error){
+
+    }
 }
