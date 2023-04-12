@@ -8,6 +8,7 @@ exports.register = async (req, res)=>{
     const name = req.body.name;
     const user = req.body.user;
     const pass = req.body.pass;
+    let passHash = await bcryptjs.hash(pass, 8)
+   // console.log(passHash)
 
-    console.log(name + " , " + user + " , " + pass)
 }
