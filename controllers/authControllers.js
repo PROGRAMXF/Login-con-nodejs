@@ -24,12 +24,12 @@ try {
 }
 
 //metodo para el login
-exports.login = async(req,res)=>{
+exports.login = async(req, res)=>{
     try{
         const user = req.body.user;
         const pass = req.body.pass;
         
-        if(user || pass){
+        if(!user || !pass){
             res.render('login', {
                 alert:true,
                 alertTitle:"Advertencia",
@@ -45,9 +45,9 @@ exports.login = async(req,res)=>{
                 if(results.length == 0 || ! (await bcryptjs.compare(pass, results[0].pass))){
                     res.render('login', {
                         alert:true,
-                        alertTitle:"Advertencia",
-                        alertMessage:"Ingrese un usuario y password",
-                        alertIcon:'info',
+                        alertTitle:"Error",
+                        alertMessage:"Usuario y/o Password incorrectas",
+                        alertIcon:'error',
                         showConfirmButton: true,
                         timer:false,
                         ruta:'login'

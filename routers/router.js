@@ -12,17 +12,17 @@ const authControllers = require('../controllers/authControllers');
 
 router.get('/', (req, res)=>{
     
-    res.render('index.ejs');
+    res.render('index');
 });
 
 //ruta para el login
 router.get('/login', (req, res)=>{
-    res.render('login.ejs',{alert:false});
+    res.render('login',{alert:false});
 });
 
 //ruta para el register
 router.get('/register', (req, res)=>{
-    res.render('register.ejs');
+    res.render('register');
 });
 
 
@@ -32,4 +32,4 @@ router.get('/register', (req, res)=>{
 router.post('/register', authControllers.register);
 router.post('/login', authControllers.login);
 
-module.exports = router;
+module.exports = router
