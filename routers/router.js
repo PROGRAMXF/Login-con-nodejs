@@ -10,9 +10,9 @@ const authControllers = require('../controllers/authControllers');
 //router para las vistas
 
 
-router.get('/', (req, res)=>{
+router.get('/', authControllers.isAuthenticated, (req, res)=>{
     
-    res.render('index');
+    res.render('index', {user:req.user});
 });
 
 //ruta para el login
@@ -31,5 +31,6 @@ router.get('/register', (req, res)=>{
 
 router.post('/register', authControllers.register);
 router.post('/login', authControllers.login);
+router.get('/logout', authControllers.logout);
 
 module.exports = router

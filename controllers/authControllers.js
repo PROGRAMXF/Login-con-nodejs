@@ -86,3 +86,33 @@ exports.login = async(req, res)=>{
         console.log(error)
     }
 }
+
+//si esta autenticado
+
+exports.isAuthenticated = async (req, res, next)=>{
+    if (req.cookies.jwt){
+        try {
+            const decodificada = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRETO)
+            //consulta para saber si el usuario esta en la base de datos
+            conexion.query('SELECT * FROM users WHERE id = ?', [decodificada.id], (error, results)=>{
+                if(!results){
+                    return next()
+                }
+                req.user = results[0]
+                return next()
+            })
+        } catch (error){
+            console.log(error)
+            return next()
+
+        }
+    }else{
+        res.redirect('/login')
+        
+    }
+};
+
+exports.logout = (req, res)=>{
+    res.clearCookie('jwt')
+    return res.redirect('/')
+}
